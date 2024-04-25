@@ -6,7 +6,7 @@
 /*   By: dpaco <dpaco@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 23:02:58 by dpaco             #+#    #+#             */
-/*   Updated: 2024/04/25 21:49:11 by dpaco            ###   ########.fr       */
+/*   Updated: 2024/04/25 22:12:46 by dpaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ void	philo_is_eating(t_philo *philo)
 void	philo_is_sleeping(t_philo *philo)
 {
 	message_from_philo("is sleeping", philo);
-	//pthread_mutex_lock(&philo->program->mutex);
 	ft_busy(philo->time_to_sleep);
-	//pthread_mutex_unlock(&philo->program->mutex);
 }
 
 void	philo_is_thinking(t_philo *philo)

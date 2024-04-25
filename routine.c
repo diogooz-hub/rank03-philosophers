@@ -6,7 +6,7 @@
 /*   By: dpaco <dpaco@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:47:16 by dpaco             #+#    #+#             */
-/*   Updated: 2024/04/25 17:04:27 by dpaco            ###   ########.fr       */
+/*   Updated: 2024/04/25 22:06:29 by dpaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	*routine(void *args)
 			return (0);
 		philo_is_sleeping(philo);
 		philo_is_thinking(philo);
-		//printf("all full: %d\n", philo->program->all_full);
 	}
 	return (0);
 }

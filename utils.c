@@ -6,7 +6,7 @@
 /*   By: dpaco <dpaco@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:07:41 by dpaco             #+#    #+#             */
-/*   Updated: 2024/04/25 15:28:07 by dpaco            ###   ########.fr       */
+/*   Updated: 2024/04/25 22:08:05 by dpaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	message_from_philo(char *str, t_philo *philosopher)
 {
-	if (philo_is_dead(philosopher) || philos_are_full(philosopher))
-			return ;
+	//if (philo_is_dead(philosopher) || philos_are_full(philosopher))
+	//		return ;
 	pthread_mutex_lock(&philosopher->program->mutex);
 	ft_printf("%d %d %s\n", (get_time() - philosopher->program->starting_time), philosopher->id, str);
 	pthread_mutex_unlock(&philosopher->program->mutex);
