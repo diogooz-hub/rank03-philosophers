@@ -6,7 +6,7 @@
 /*   By: dpaco <dpaco@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:47:16 by dpaco             #+#    #+#             */
-/*   Updated: 2024/04/25 15:29:32 by dpaco            ###   ########.fr       */
+/*   Updated: 2024/04/25 17:04:27 by dpaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	*routine(void *args)
 	philo = (t_philo *)args;
 	while (philo->program->philosopher_dead == 0)
 	{
-		if (philo_is_dead(philo) || philo->program->number_of_philos == 1)
+		if (philo_is_dead(philo) || philo->program->number_of_philos == 1 || philos_are_full(philo))
 			return (0);
 		philo_takes_fork(philo);
-		if (philo_is_dead(philo))
+		if (philo_is_dead(philo) || philos_are_full(philo))
 			return (0);
 		philo_is_eating(philo);
-		if (philo_is_dead(philo))
+		if (philo_is_dead(philo) || philos_are_full(philo))
 			return (0);
 		philo_is_sleeping(philo);
 		philo_is_thinking(philo);

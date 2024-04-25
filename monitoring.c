@@ -6,7 +6,7 @@
 /*   By: dpaco <dpaco@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 16:18:50 by dpaco             #+#    #+#             */
-/*   Updated: 2024/04/25 14:42:51 by dpaco            ###   ########.fr       */
+/*   Updated: 2024/04/25 22:02:57 by dpaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	check_if_all_full(t_data *program)
 	i = -1;
 	while (++i < program->number_of_philos)
 	{
-		//printf("id: %d number of meals: %d\n", program->philosopher[i].id, program->philosopher[i].number_of_meals);
 		if (program->philosopher[i].number_of_meals != 0)
 			return (0);
 	}
@@ -88,7 +87,7 @@ void	monitoring(t_data *program)
 		{
 			usleep(200);
 			pthread_mutex_unlock(&program->mutex);
-			printf("check1\n");
+			//printf("check1\n");
 			return ;
 		}
 		pthread_mutex_unlock(&program->mutex);
@@ -96,8 +95,9 @@ void	monitoring(t_data *program)
 		if (check_if_all_full(program))
 		{
 			usleep(200);
+			ft_printf("all full\n");
 			pthread_mutex_unlock(&program->mutex);
-			printf("check2\n");
+			//printf("check2\n");
 			return ;
 		}
 		pthread_mutex_unlock(&program->mutex);

@@ -10,12 +10,13 @@ RM = rm -f
 LIBFT_DIR = libft
 LIBFT_MAKEFILE = $(LIBFT_DIR)/Makefile
 
-%.o: %.c push_swap.h
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+%.o: %.c philo.h
+	@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 $(NAME): $(OBJS) $(LIBFT_MAKEFILE)
 	@make -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L $(LIBFT_DIR) -lft
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L $(LIBFT_DIR) -lft
+	@echo "Make philo done"
 
 all: $(NAME)
 
@@ -32,4 +33,4 @@ re: fclean all
 .PHONY: all clean fclean re
 
 $(LIBFT_MAKEFILE):
-	@make -C $(LIBFT_DIR)
+	@make -s -C $(LIBFT_DIR)

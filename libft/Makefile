@@ -82,10 +82,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(AR) $(NAME) $(OBJ)
+	@echo "Make libft done"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(HEAD) -c $< -o $@
+	@$(CC) $(CFLAGS) $(HEAD) -c $< -o $@
 
 clean:
 	$(RM) -r $(OBJ_DIR)
