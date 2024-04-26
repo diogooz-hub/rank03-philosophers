@@ -6,17 +6,16 @@
 /*   By: dpaco <dpaco@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 16:18:50 by dpaco             #+#    #+#             */
-/*   Updated: 2024/04/25 22:02:57 by dpaco            ###   ########.fr       */
+/*   Updated: 2024/04/26 19:15:56 by dpaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-int	philo_is_dead(t_philo *philo)
+int	stop_threds(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->program->mutex);
-	if (philo->program->philosopher_dead == 1)
+	if (philo->program->philosopher_dead == 1 || philo->program->all_full == 1)
 	{
 		pthread_mutex_unlock(&philo->program->mutex);
 		return (1);
@@ -24,19 +23,6 @@ int	philo_is_dead(t_philo *philo)
 	pthread_mutex_unlock(&philo->program->mutex);
 	return (0);
 }
-
-int	philos_are_full(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->program->mutex);
-	if (philo->program->all_full == 1)
-	{
-		pthread_mutex_unlock(&philo->program->mutex);
-		return (1);
-	}
-	pthread_mutex_unlock(&philo->program->mutex);
-	return (0);
-}
-
 
 int	check_if_all_full(t_data *program)
 {
