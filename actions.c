@@ -6,7 +6,7 @@
 /*   By: dpaco <dpaco@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 23:02:58 by dpaco             #+#    #+#             */
-/*   Updated: 2024/04/27 15:36:35 by dpaco            ###   ########.fr       */
+/*   Updated: 2024/04/27 16:48:30 by dpaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	philo_is_eating(t_philo *philo)
 {
 	message_from_philo("is eating", philo);
 	pthread_mutex_lock(&philo->program->mutex);
-	printf("get_time: %llu\n", get_time());
-	printf("philo->program->starting_time: %llu\n", philo->program->starting_time);
 	philo->last_meal = get_time() - philo->program->starting_time;
 	philo->time_to_die = philo->last_meal + philo->program->time_to_die;
 	pthread_mutex_unlock(&philo->program->mutex);

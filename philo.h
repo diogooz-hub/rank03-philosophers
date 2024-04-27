@@ -6,7 +6,7 @@
 /*   By: dpaco <dpaco@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 19:19:40 by dpaco             #+#    #+#             */
-/*   Updated: 2024/04/27 11:55:14 by dpaco            ###   ########.fr       */
+/*   Updated: 2024/04/27 17:30:46 by dpaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		stop_threds(t_philo *philo);
 u_int64_t		get_time(void);
 void			ft_busy(u_int64_t time);
 void			free_program(t_data *program);
-int				exit_error(char *s, t_data *program);
+void			destroy_fork_mutexes(t_data *program);
 
 //messages
 void	message_from_philo(char *str, t_philo *philosopher);
