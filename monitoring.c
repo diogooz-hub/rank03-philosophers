@@ -73,7 +73,6 @@ void	monitoring(t_data *program)
 		{
 			usleep(200);
 			pthread_mutex_unlock(&program->mutex);
-			//printf("check1\n");
 			return ;
 		}
 		pthread_mutex_unlock(&program->mutex);
@@ -81,9 +80,8 @@ void	monitoring(t_data *program)
 		if (check_if_all_full(program))
 		{
 			usleep(200);
-			ft_printf("all full\n");
+			ft_printf("all mfers are full\n");
 			pthread_mutex_unlock(&program->mutex);
-			//printf("check2\n");
 			return ;
 		}
 		pthread_mutex_unlock(&program->mutex);

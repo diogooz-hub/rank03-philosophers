@@ -17,32 +17,31 @@ void	message_from_philo(char *str, t_philo *philosopher)
 	if (stop_threds(philosopher))
 		return ;
 	pthread_mutex_lock(&philosopher->program->mutex);
-	ft_printf("%d %d %s\n", (get_time() - philosopher->program->starting_time), philosopher->id, str);
+	ft_printf("%d %d %s\n", (get_time() - philosopher->program->starting_time), 
+		philosopher->id, str);
 	pthread_mutex_unlock(&philosopher->program->mutex);
 }
 
 void	message_from_monitoring(char *str, t_philo *philosopher)
 {
-	ft_printf("%d %d %s\n", (get_time() - philosopher->program->starting_time), philosopher->id, str);
+	ft_printf("%d %d %s\n", (get_time() - philosopher->program->starting_time), 
+		philosopher->id, str);
 }
 
-
-u_int64_t	get_time(void)
+unsigned long	get_time(void)
 {
 	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL))
 		return (0);
-	return ((tv.tv_sec * (u_int64_t)1000) + (tv.tv_usec / 1000));
+	return ((tv.tv_sec * (unsigned long long)1000) + (tv.tv_usec / 1000));
 }
 
-
-void	ft_busy(uint64_t time)
+void	ft_busy(unsigned long time)
 {
-	u_int64_t	start;
+	unsigned long long	start;
 
 	start = get_time();
 	while ((get_time() - start) < time)
 		usleep(500);
 }
-

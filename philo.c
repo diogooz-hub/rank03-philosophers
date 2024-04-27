@@ -12,9 +12,9 @@
 
 #include "philo.h"
 
-int init_philos(t_data *program)
+int	init_philos(t_data *program)
 {
-	int i;
+	int	i;
 
 	program->philosopher = malloc(sizeof(t_philo) * program->number_of_philos);
 	if (!(program->philosopher))
@@ -23,8 +23,8 @@ int init_philos(t_data *program)
 		pthread_mutex_destroy(&program->mutex);
 		return (1);
 	}
-	i = 0;
-	while (i < program->number_of_philos)
+	i = -1;
+	while (++i < program->number_of_philos)
 	{
 		program->philosopher[i].id = i + 1;
 		program->philosopher[i].last_meal = 0;
@@ -34,18 +34,19 @@ int init_philos(t_data *program)
 		program->philosopher[i].time_to_eat = program->time_to_eat;
 		program->philosopher[i].number_of_meals = program->number_of_meals;
 		program->philosopher[i].left_fork = &program->fork_mutex[i];
-		program->philosopher[i].right_fork = &program->fork_mutex[(i + 1) % program->number_of_philos];
+		program->philosopher[i].right_fork = 
+			&program->fork_mutex[(i + 1) % program->number_of_philos];
 		program->philosopher[i].program = program;
-		i++;
 	}
 	return (0);
 }
 
-int init_mutexes(t_data *program)
+int	init_mutexes(t_data *program)
 {
 	int	i;
 
-	program->fork_mutex = malloc(sizeof(pthread_mutex_t) * program->number_of_philos);
+	program->fork_mutex = 
+		malloc(sizeof(pthread_mutex_t) * program->number_of_philos);
 	if (!program->fork_mutex)
 		return (1);
 	i = -1;
@@ -84,12 +85,11 @@ int	init_structs(t_data *program, char **av)
 	return (0);
 }
 
-//MUDAR O EXIT ERROR
 int	main(int ac, char **av)
 {
 	t_data	program;
 
-	if (check_arguments(ac, av))
+	if (!check_arguments(ac, av))
 	{
 		if (!init_structs(&program, av))
 		{
@@ -98,6 +98,7 @@ int	main(int ac, char **av)
 			join_threads(&program);
 			free_program(&program);
 		}
-	return (0);
+		return (0);
 	}
+	return (1);
 }

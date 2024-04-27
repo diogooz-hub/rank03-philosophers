@@ -12,30 +12,36 @@
 
 #include "philo.h"
 
-void philo_takes_fork(t_philo *philo)
+void	handle_one_philo(t_philo *philo)
 {
-	pthread_mutex_t *first_fork;
+	ft_busy(philo->time_to_eat);
+}
+
+int	philo_takes_fork(t_philo *philo)
+{
+	pthread_mutex_t	*first_fork;
 	pthread_mutex_t	*second_fork;
 
-    if ((philo->id % 2) == 0)
+	if ((philo->id % 2) == 0)
 	{
-        first_fork = philo->right_fork;
-        second_fork = philo->left_fork;
-    }
+		first_fork = philo->right_fork;
+		second_fork = philo->left_fork;
+	}
 	else
 	{
-        first_fork = philo->left_fork;
-        second_fork = philo->right_fork;
-    }
-    if (pthread_mutex_lock(first_fork) != 0)
-		return ;
-    message_from_philo("has taken fork", philo);
-    if (pthread_mutex_lock(second_fork) != 0)
+		first_fork = philo->left_fork;
+		second_fork = philo->right_fork;
+	}
+	if (pthread_mutex_lock(first_fork) != 0)
+		return (1);
+	message_from_philo("has taken fork", philo);
+	if (pthread_mutex_lock(second_fork) != 0)
 	{
 		pthread_mutex_unlock(first_fork);
-		return ;
+		return (1);
 	}
-    message_from_philo("has taken fork", philo);
+	message_from_philo("has taken fork", philo);
+	return (0);
 }
 
 void	philo_is_eating(t_philo *philo)

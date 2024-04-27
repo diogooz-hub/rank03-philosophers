@@ -22,7 +22,6 @@ void	destroy_fork_mutexes(t_data *program)
 	free(program->fork_mutex);
 }
 
-
 void	free_program(t_data *program)
 {
 	destroy_fork_mutexes(program);

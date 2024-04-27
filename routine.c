@@ -14,14 +14,22 @@
 
 void	*routine(void *args)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)args;
+	if (philo->program->number_of_philos == 1)
+	{
+		handle_one_philo(philo);
+		return (NULL);		
+	}
+	if (philo->id % 2 == 0)
+		ft_busy(philo->time_to_eat - 10);
 	while (!stop_threds(philo))
 	{
-		if (philo->program->number_of_philos == 1 || stop_threds(philo))
+		if (stop_threds(philo))
 			break ;
-		philo_takes_fork(philo);
+		if (philo_takes_fork(philo))
+			break ;
 		philo_is_eating(philo);
 		if (stop_threds(philo))
 			break ;
@@ -40,8 +48,11 @@ void	join_threads(t_data *program)
 	i = -1;
 	while (++i < program->number_of_philos)
 	{
-		if (pthread_join(program->philosopher[i].thread_id, NULL))
-			exit_error("error joining threads", program);
+		if (pthread_join(program->philosopher[i].thread_id, NULL) != 0)
+		{
+			free_program(program);
+			return ;
+		}
 	}
 }
 
@@ -53,7 +64,11 @@ void	begin_threads(t_data *program)
 	program->starting_time = get_time();
 	while (++i < program->number_of_philos)
 	{
-		if (pthread_create(&program->philosopher[i].thread_id, NULL, &routine, (void *)&program->philosopher[i]))
-			exit_error("error creating threads", program);
+		if (pthread_create(&program->philosopher[i].thread_id, NULL, 
+				&routine, (void *)&program->philosopher[i]) != 0)
+		{
+			free_program(program);
+			return ;
+		}
 	}
 }

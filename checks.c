@@ -24,28 +24,28 @@ int	check_digits(int ac, char **av)
 		while (av[i][j])
 		{
 			if ((int)av[i][j] < 48 || (int)av[i][j] > 57)
-				return (0);
+				return (1);
 			j++;
 		}
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
-int check_arguments(int ac, char **av)
+int	check_arguments(int ac, char **av)
 {
 	if (ac < 5 || ac > 6)
 	{
-		printf("Error: wrong number of arguments\n");
-		return (0);
+		ft_printf("Error: wrong number of arguments\n");
+		return (1);
 	}
 	else
 	{
-		if (!check_digits(ac, av))
+		if (check_digits(ac, av))
 		{
-			printf("Error: args are not numbers\n");
-			return (0);
+			ft_printf("Error: invalid args\n");
+			return (1);
 		}
 	}
-	return (1);
+	return (0);
 }
