@@ -6,7 +6,7 @@
 /*   By: dpaco <dpaco@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:07:41 by dpaco             #+#    #+#             */
-/*   Updated: 2024/04/26 19:50:24 by dpaco            ###   ########.fr       */
+/*   Updated: 2024/04/27 15:32:00 by dpaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ u_int64_t	get_time(void)
 }
 
 
-void	ft_busy(uint64_t sleep_time)
+void	ft_busy(uint64_t time)
 {
 	u_int64_t	start;
 
 	start = get_time();
-	while ((get_time() - start) < sleep_time)
+	while ((get_time() - start) < time)
 		usleep(500);
 }
 

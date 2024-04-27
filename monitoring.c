@@ -6,7 +6,7 @@
 /*   By: dpaco <dpaco@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 16:18:50 by dpaco             #+#    #+#             */
-/*   Updated: 2024/04/26 19:15:56 by dpaco            ###   ########.fr       */
+/*   Updated: 2024/04/27 16:13:50 by dpaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	monitoring(t_data *program)
 		pthread_mutex_lock(&program->mutex);
 		if (check_if_one_is_dead(program))
 		{
-			usleep(200);
+			usleep(500);
 			pthread_mutex_unlock(&program->mutex);
 			//printf("check1\n");
 			return ;
@@ -80,13 +80,13 @@ void	monitoring(t_data *program)
 		pthread_mutex_lock(&program->mutex);
 		if (check_if_all_full(program))
 		{
-			usleep(200);
+			usleep(500);
 			ft_printf("all full\n");
 			pthread_mutex_unlock(&program->mutex);
 			//printf("check2\n");
 			return ;
 		}
 		pthread_mutex_unlock(&program->mutex);
-		usleep(200);
+		usleep(500);
 	}
 }

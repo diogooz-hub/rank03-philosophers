@@ -6,34 +6,42 @@
 /*   By: dpaco <dpaco@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 00:42:07 by dpaco             #+#    #+#             */
-/*   Updated: 2024/04/13 00:43:06 by dpaco            ###   ########.fr       */
+/*   Updated: 2024/04/27 15:35:46 by dpaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	destroy_mutexes(t_data *program)
+//fazer verificações de as coisas existem antes de destruir ou dar free
+
+
+void	destroy_fork_mutexes(t_data *program)
 {
 	int	i;
 
 	i = -1;
 	while (++i < program->number_of_philos)
 		pthread_mutex_destroy(&program->fork_mutex[i]);
-	pthread_mutex_destroy(&program->mutex);
 }
 
 
 void	free_program(t_data *program)
 {
-	destroy_mutexes (program);
-	free (program->fork_mutex);
-	free (program->philosopher);
-	//free (program);
+	//if (program->mutex)
+	//	pthread_mutex_destroy(&program->mutex);
+	if (program->fork_mutex)
+	{
+		destroy_fork_mutexes(program);
+		free (program->fork_mutex);
+	}
+	if (program->philosopher)
+		free (program->philosopher);
 }
 
 
-void	exit_error(char *s)
+int	exit_error(char *s, t_data *program)
 {
+	free_program(program);
 	ft_printf("%s\n", s);
-	exit (1);
+	return (1);
 }

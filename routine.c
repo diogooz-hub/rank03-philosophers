@@ -6,7 +6,7 @@
 /*   By: dpaco <dpaco@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:47:16 by dpaco             #+#    #+#             */
-/*   Updated: 2024/04/26 19:48:32 by dpaco            ###   ########.fr       */
+/*   Updated: 2024/04/27 12:13:51 by dpaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	join_threads(t_data *program)
 	while (++i < program->number_of_philos)
 	{
 		if (pthread_join(program->philosopher[i].thread_id, NULL))
-			exit_error("error joining thread");
+			exit_error("error joining threads", program);
 	}
 }
 
@@ -54,6 +54,6 @@ void	begin_threads(t_data *program)
 	while (++i < program->number_of_philos)
 	{
 		if (pthread_create(&program->philosopher[i].thread_id, NULL, &routine, (void *)&program->philosopher[i]))
-			exit_error("error creating thread");
+			exit_error("error creating threads", program);
 	}
 }

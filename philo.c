@@ -6,7 +6,7 @@
 /*   By: dpaco <dpaco@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 19:18:58 by dpaco             #+#    #+#             */
-/*   Updated: 2024/04/25 22:42:30 by dpaco            ###   ########.fr       */
+/*   Updated: 2024/04/27 11:55:31 by dpaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int init_philos(t_data *program)
 
 	program->philosopher = malloc(sizeof(t_philo) * program->number_of_philos);
 	if (!(program->philosopher))
-		return(0);
+		return (exit_error("Error: malloc failed", program));
 	i = 0;
 	while (i < program->number_of_philos)
 	{
@@ -34,7 +34,7 @@ int init_philos(t_data *program)
 		program->philosopher[i].program = program;
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 int init_mutexes(t_data *program)
@@ -43,15 +43,15 @@ int init_mutexes(t_data *program)
 
 	program->fork_mutex = malloc(sizeof(pthread_mutex_t) * program->number_of_philos);
 	if (!program->fork_mutex)
-		return (1);
+		return (exit_error("Error: malloc failed", program));
 	i = -1;
 	while (++i < program->number_of_philos)
 	{
 		if (pthread_mutex_init(&program->fork_mutex[i], NULL))
-			exit_error("Error creating fork mutex");
+			return (exit_error("Error: mutex init failed", program));
 	}
 	if (pthread_mutex_init(&program->mutex, NULL))
-		exit_error("Error creating program mutex");
+		return (exit_error("Error: mutex init failed", program));
 	return (0);
 }
 
@@ -74,13 +74,14 @@ int	init_structs(t_data *program, char **av)
 	return (0);
 }
 
+//MUDAR O EXIT ERROR
 int	main(int ac, char **av)
 {
 	t_data	program;
 
 	if (check_arguments(ac, av))
 	{
-		if (init_structs(&program, av))
+		if (!init_structs(&program, av))
 		{
 			//printf("--call begin threads on main\n");
 			begin_threads(&program);
