@@ -6,7 +6,7 @@
 /*   By: dpaco <dpaco@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:47:16 by dpaco             #+#    #+#             */
-/*   Updated: 2024/04/27 12:13:51 by dpaco            ###   ########.fr       */
+/*   Updated: 2024/04/28 12:17:52 by dpaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*routine(void *args)
 	if (philo->program->number_of_philos == 1)
 	{
 		handle_one_philo(philo);
-		return (NULL);		
+		return (NULL);
 	}
 	if (philo->id % 2 == 0)
 		ft_busy(philo->time_to_eat - 10);
@@ -64,7 +64,7 @@ void	begin_threads(t_data *program)
 	program->starting_time = get_time();
 	while (++i < program->number_of_philos)
 	{
-		if (pthread_create(&program->philosopher[i].thread_id, NULL, 
+		if (pthread_create(&program->philosopher[i].thread_id, NULL,
 				&routine, (void *)&program->philosopher[i]) != 0)
 		{
 			free_program(program);

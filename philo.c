@@ -6,7 +6,7 @@
 /*   By: dpaco <dpaco@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 19:18:58 by dpaco             #+#    #+#             */
-/*   Updated: 2024/04/27 17:28:58 by dpaco            ###   ########.fr       */
+/*   Updated: 2024/04/28 12:17:11 by dpaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,13 @@ int	init_philos(t_data *program)
 	{
 		program->philosopher[i].id = i + 1;
 		program->philosopher[i].last_meal = 0;
-		program->philosopher[i].eating = 0;
 		program->philosopher[i].time_to_die = program->time_to_die;
 		program->philosopher[i].time_to_sleep = program->time_to_sleep;
 		program->philosopher[i].time_to_eat = program->time_to_eat;
 		program->philosopher[i].number_of_meals = program->number_of_meals;
 		program->philosopher[i].left_fork = &program->fork_mutex[i];
-		program->philosopher[i].right_fork = 
-			&program->fork_mutex[(i + 1) % program->number_of_philos];
+		program->philosopher[i].right_fork = &program->fork_mutex[(i + 1)
+			% program->number_of_philos];
 		program->philosopher[i].program = program;
 	}
 	return (0);
@@ -45,8 +44,8 @@ int	init_mutexes(t_data *program)
 {
 	int	i;
 
-	program->fork_mutex = 
-		malloc(sizeof(pthread_mutex_t) * program->number_of_philos);
+	program->fork_mutex = malloc(sizeof(pthread_mutex_t)
+			* program->number_of_philos);
 	if (!program->fork_mutex)
 		return (1);
 	i = -1;

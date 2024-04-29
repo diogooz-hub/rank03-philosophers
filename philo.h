@@ -6,7 +6,7 @@
 /*   By: dpaco <dpaco@student.42lisboa.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 19:19:40 by dpaco             #+#    #+#             */
-/*   Updated: 2024/04/27 17:30:46 by dpaco            ###   ########.fr       */
+/*   Updated: 2024/04/28 12:16:30 by dpaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ typedef struct s_philo
 {
 	int								id;
 	int								last_meal;
-	int								eating;
 	int								number_of_meals;
-	unsigned long					time_to_die;
-	unsigned long					time_to_sleep;
-	unsigned long					time_to_eat;
+	unsigned int					time_to_die;
+	unsigned int					time_to_sleep;
+	unsigned int					time_to_eat;
 	pthread_t						thread_id;
 	pthread_mutex_t					*left_fork;
 	pthread_mutex_t					*right_fork;
@@ -42,11 +41,11 @@ typedef struct s_philo
 typedef struct s_data
 {
 	int								number_of_philos;
-	unsigned long					time_to_die;
-	unsigned long					time_to_sleep;
-	unsigned long					time_to_eat;
+	unsigned int					time_to_die;
+	unsigned int					time_to_sleep;
+	unsigned int					time_to_eat;
 	int								number_of_meals;
-	unsigned long					starting_time;
+	unsigned int					starting_time;
 	int								philosopher_dead;
 	int								all_full;
 	pthread_mutex_t					mutex;
@@ -73,8 +72,8 @@ void				monitoring(t_data *program);
 int					stop_threds(t_philo *philo);
 
 //utils
-unsigned long		get_time(void);
-void				ft_busy(unsigned long time);
+unsigned int		get_time(void);
+void				ft_busy(unsigned int time);
 void				free_program(t_data *program);
 void				destroy_fork_mutexes(t_data *program);
 
